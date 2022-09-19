@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from hogwarts_inventory.helper import token_required
-from hogwarts_inventory.models import db,wand,wand_schema wands_schema
+from hogwarts_inventory.models import db,wand,wand_schema,wands
+
 
 api = Blueprint('api', __name__, url_prefix = '/api')
 
@@ -30,7 +31,7 @@ def create_hogwarts(current_user_token):
 
     print(f"User Token: {current_user_token.token}")
 
-   wand = wands(name, description, price, spell_strenght, casting_time, max_speed, dimensions, weight, cost_of_production, series, user_token = user_token)
+    wand = wands(name, description, price, spell_strenght, casting_time, max_speed, dimensions, weight, cost_of_production, series, user_token = user_token)
 
     db.session.add(wand)
     db.session.commit()
@@ -40,27 +41,27 @@ def create_hogwarts(current_user_token):
 
 
 
-@api.route( wands/<id>', methods = ['GET'])
+@api.route( 'wands'/ id, methods = ['GET'])
 @token_required
 def get_drone(current_user_token, id):
     owner = current_user_token.token
     if owner == current_user_token.token:
        wand =wand.query.get(id)
-        response =wand_schema.dump(drone)
-        return jsonify(response)
+       response = wand_schema.dump(wand)
+       return jsonify(response)
     else:
         return jsonify({'message': 'Valid Token Required'}), 401
 
 
-@api.route( wands', methods = ['GET']) 
+@api.route( 'wands', methods = ['GET']) 
 @token_required
-def get wands(current_user_token):
-    owner = current_user_token.token wands =wand.query.filter_by(user_token = owner).all()
-    response  wands_schema.dum wands)
+def get_wands(current_user_token):
+    owner = current_user_token.token.wands =wand.query.filter_by(user_token = owner).all()
+    response = wand_schema.dump(wand)
     return jsonify(response)
 
 
-@api.route( wands/<id>', methods = ['POST', 'PUT'])
+@api.route( wands/ id, methods = ['POST', 'PUT'])
 @token_required
 def update_drone(current_user_token, id):
    wand =wands.query.get(id)    
@@ -75,17 +76,17 @@ def update_drone(current_user_token, id):
    wand.cost_of_production = request.json['cost_of_production']
    wand.series = request.json['series']
    wand.user_token = current_user_token.token
+   
+   db.session.commit()
+   response =wand_schema.dump(wand)
+   return jsonify(response)
 
-    db.session.commit()
-    response =wand_schema.dump(drone)
-    return jsonify(response)
 
-
-@api.route( wands/<id>', methods = ["DELETE"])
+@api.route( wands/id, methods = ["DELETE"])
 @token_required
 def delete_wand(current_user_token, id):
    wand =wand.query.get(id)
-    db.session.delete(wand)
-    db.session.commit()
-    response =wand_schema.dump(wand)
-    return jsonify(response)
+   db.session.delete(wand)
+   db.session.commit()
+   response =wand_schema.dump(wand)
+   return jsonify(response)
