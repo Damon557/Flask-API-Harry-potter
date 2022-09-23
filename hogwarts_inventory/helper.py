@@ -11,7 +11,7 @@ import decimal
 
 def token_required(our_flask_function):
     @wraps(our_flask_function)
-    def decorated(*args, **kwargs)
+    def decorated(*args, **kwargs):
         token = None
 
         if 'x-access-tokenn' in request.headers:

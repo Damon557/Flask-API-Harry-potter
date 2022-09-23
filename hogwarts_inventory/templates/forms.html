@@ -1,13 +1,13 @@
 <form method = "POST">
-    {{ form.hidden_tag }}
+    {{ form.hidden_tag() }}
     <div class="form-group">
         <feildset id="email-field">
-            {{ form.email,label}}
+            {{ form.email.label}}
 
             {{form.email(class = "form-control" , placeholder = "Enter email here.")}}
         </feildset>
         <feildset id="pass-field">
-            {{ form.password,label}}
+            {{ form.password.label}}
             {{ form.password(class = "form-control", placeholder = "Enter password here")}}
         </feildset>
 

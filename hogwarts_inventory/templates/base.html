@@ -12,9 +12,9 @@
 </head>
 <body>
 
-    <nav class=""ct-nav">
+    <nav class="ct-nav">
         <div>
-            <img src="../static/images/Castle.jpg" alt="Hogwarts">
+            <img src="../static/images/images1.jpg" alt="Hogwarts">
         </div>
         <div>
             <ul id="horizontal-list">
@@ -24,7 +24,7 @@
                 <a href="{{ url_for('site.profile')}}">
                     <li>Profile</li>
                 </a>
-                <a href="#">
+                <a href="https://www.wizardingworld.com/collections/first-year-challenges">
                     <li>Challenges</li>
                 </a>
                 <a href="{{ url_for('auth.signin')}}">
@@ -32,6 +32,9 @@
                 </a>
                 <a href="{{ url_for('auth.signup')}}">
                     <li>Sign Up</li>
+                </a>
+                <a href="{{ ('/logout')}}">
+                    <li>Sign out</li>
                 </a>
             </ul>
         </div>

@@ -24,6 +24,7 @@ app.config.from_object(Config)
 root_db.init_app(app)
 
 migrate = Migrate(app, root_db)
+from . import models
 
 login_manager.init_app(app)
 login_manager.login_veiw = 'auth.signin'

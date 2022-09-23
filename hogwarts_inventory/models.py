@@ -102,5 +102,5 @@ class WandSchema(ma.Schema):
     class Meta:
         feilds = {'id', 'name', 'description', 'price', 'spell_casting', 'casting_time', 'max_speed', 'dimensions', 'weight', 'cost_of_production', 'series'}
 
-drone_schema = WandSchema()
-drones_schema = WandSchema(many = True)
+wand_schema = WandSchema()
+wands_schema = WandSchema(many = True)

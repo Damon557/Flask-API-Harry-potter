@@ -5,7 +5,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 
 auth = Blueprint('auth', __name__, template_folder='auth_templates')
 
-@auth.route('/signip', methods = ['GET', 'POST' ])
+@auth.route('/signup', methods = ['GET', 'POST' ])
 def signup():
     form = UserLoginForm()
     try:
@@ -21,12 +21,13 @@ def signup():
             db.session.commit()
 
 
-        flash(f"You have succesfully created a user account{email}", 'user-created')
-        return redirect(url_for('auth.signin'))
+            flash(f"You have succesfully created a user account{email}", 'user-created')
+            return redirect(url_for('auth.signin'))
 
 
     except:
         raise Exception('Invalid Form Data: Please check your email')
+
     return render_template('signup.html', form = form)
 
 @auth.route('/signin', methods = ["GET", 'POST'])
